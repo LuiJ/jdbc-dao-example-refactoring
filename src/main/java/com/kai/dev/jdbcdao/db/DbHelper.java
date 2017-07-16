@@ -1,6 +1,6 @@
 package com.kai.dev.jdbcdao.db;
 
-import com.kai.dev.jdbcdao.entity.Identifiable;
+import com.kai.dev.jdbcdao.entity.Entity;
 import com.kai.dev.jdbcdao.entity.builder.EntityBuilder;
 import com.kai.dev.jdbcdao.entity.builder.EntityBuilderFactory;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DbHelper <T extends Identifiable> {
+public class DbHelper <T extends Entity> {
     
     private Class<T> type;
     

@@ -1,16 +1,16 @@
 package com.kai.dev.jdbcdao.entity.builder;
 
-import com.kai.dev.jdbcdao.entity.Identifiable;
+import com.kai.dev.jdbcdao.entity.Entity;
 import com.kai.dev.jdbcdao.entity.Server;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class ServerBuilder implements EntityBuilder {
-
+public class ServerBuilder implements EntityBuilder 
+{
     @Override
-    public Identifiable build(ResultSet serverResultSet) throws SQLException {
-        
+    public Entity build(ResultSet serverResultSet) throws SQLException 
+    {        
         Server server = new Server();
         
         Integer id = (Integer) serverResultSet.getObject(Server.FIELD_ID);

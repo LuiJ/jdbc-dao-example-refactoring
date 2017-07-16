@@ -1,7 +1,7 @@
 package com.kai.dev.jdbcdao.entity.builder;
 
 import com.kai.dev.jdbcdao.entity.Continent;
-import com.kai.dev.jdbcdao.entity.Identifiable;
+import com.kai.dev.jdbcdao.entity.Entity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class ContinentBuilder implements EntityBuilder {
 
     @Override
-    public Identifiable build(ResultSet continentResultSet) throws SQLException {
-        
+    public Entity build(ResultSet continentResultSet) throws SQLException 
+    {        
         Continent continent = new Continent();
         
         Integer id = (Integer) continentResultSet.getObject(Continent.FIELD_ID);

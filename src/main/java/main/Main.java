@@ -62,24 +62,36 @@ public class Main {
         
         
         
-        // ContinentDAO
-        ContinentDAO continentDAO = DAOFactory.INSTANCE.getContinentDAO();
+//        // ContinentDAO
+//        ContinentDAO continentDAO = DAOFactory.INSTANCE.getContinentDAO();
+//        
+//        Continent continent = continentDAO.getByIdWithLocationsAndServers(1);
+//        String continentName = continent.getName(); 
+//        List<Location> locations = continent.getLocations();
+//        System.out.println("----------------------------------");
+//        System.out.println("Continent: " + continentName);
+//        for (Location location : locations){
+//            String locationName = location.getName();
+//            System.out.println("    Location: " + locationName);
+//            List<Server> servers = location.getServers();
+//            for (Server server : servers){
+//                String serverName = server.getName();
+//                System.out.println("        Server: " + serverName);
+//            }
+//        }
+//        System.out.println("----------------------------------");
         
-        Continent continent = continentDAO.getByIdWithLocationsAndServers(1);
-        String continentName = continent.getName(); 
-        List<Location> locations = continent.getLocations();
-        System.out.println("----------------------------------");
-        System.out.println("Continent: " + continentName);
-        for (Location location : locations){
-            String locationName = location.getName();
-            System.out.println("    Location: " + locationName);
-            List<Server> servers = location.getServers();
-            for (Server server : servers){
-                String serverName = server.getName();
-                System.out.println("        Server: " + serverName);
-            }
-        }
-        System.out.println("----------------------------------");
+        
+        
+        
+        
+        ServerDAO serverDAO = DAOFactory.INSTANCE.getServerDAO();
+        Server server = new Server();
+        server.setId(24);
+        server.setName("TTTest");
+        server.setLocationId(5);
+        int newServerId = serverDAO.save(server);
+        System.out.println("New server ID = " + newServerId);
         
     }    
 }

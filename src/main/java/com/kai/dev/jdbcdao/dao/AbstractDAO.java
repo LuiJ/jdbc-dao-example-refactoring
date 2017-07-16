@@ -1,11 +1,11 @@
 package com.kai.dev.jdbcdao.dao;
 
-import com.kai.dev.jdbcdao.entity.Identifiable;
+import com.kai.dev.jdbcdao.entity.Entity;
 import java.util.List;
 import java.util.Properties;
 
 
-public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
+public abstract class AbstractDAO<T extends Entity> implements DAO<T> {
     
     private DAOHelper<T> helper;
     

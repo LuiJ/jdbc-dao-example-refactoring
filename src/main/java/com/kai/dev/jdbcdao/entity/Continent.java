@@ -4,28 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Continent implements Identifiable {
-
+public class Continent extends Entity 
+{
     public static final String TABLE_NAME = "continent";
-    public static final String FIELD_ID = "id";
     public static final String FIELD_NAME = "name";
     
-    private Integer id;
     private String name;
     private List<Location> locations;
     
     public Continent(){
         locations = new ArrayList<>();
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
