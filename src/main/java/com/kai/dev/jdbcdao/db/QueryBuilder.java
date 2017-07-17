@@ -23,11 +23,10 @@ public class QueryBuilder <T extends Entity>
         this.type = type;
     }    
     
-    public String buildSelectQuery(Properties conditions)
+    public String buildSelectQuery(Properties selectConditions)
     {
-        String spliter = " AND ";
-        String queryConditions = propertiesToString(conditions, spliter);
-        return "SELECT * FROM " + getTableName() + " WHERE " + queryConditions;
+        return "SELECT * FROM " + getTableName() + " "
+             + "WHERE " + formWherePart(selectConditions);
     }    
     
     public String buildSelectAllQuery()
@@ -79,16 +78,16 @@ public class QueryBuilder <T extends Entity>
     }    
     
     
-    private String propertiesToString(Properties conditions, String splitWith){
+    private String formWherePart(Properties selectConditions)
+    {
         List<String> queryParams = new ArrayList<>();
-        Enumeration<Object> keys = conditions.keys();
+        Enumeration<Object> keys = selectConditions.keys();
         while (keys.hasMoreElements()){
             String key = (String) keys.nextElement();
-            String value = (String) conditions.getProperty(key);
+            String value = (String) selectConditions.getProperty(key);
             queryParams.add(key + "='" +value + "'");
         }
-        String result = StringUtils.join(queryParams, splitWith);
-        return result;
+        return StringUtils.join(queryParams, " AND ");
     }    
     
     
