@@ -11,29 +11,37 @@ public class Server extends Entity
     private Integer locationId;
     private Location location;
     
-    public Server(){}
+    public Server()
+    {
+    }
 
-    public String getName() {
+    public String getName() 
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
-    public Integer getLocationId() {
+    public Integer getLocationId() 
+    {
         return locationId;
     }
 
-    public void setLocationId(Integer locationId) {
+    public void setLocationId(Integer locationId) 
+    {
         this.locationId = locationId;
     }
 
-    public Location getLocation() {
+    public Location getLocation() 
+    {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(Location location) 
+    {
         this.location = location;
     }           
 }

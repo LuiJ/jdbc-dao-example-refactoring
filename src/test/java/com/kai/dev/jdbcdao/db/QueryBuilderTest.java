@@ -75,4 +75,30 @@ public class QueryBuilderTest
                               + "Act: " + actualQuery;
         Assert.assertTrue(failureMessage, EXPECTED_INSERT_QUERY.equals(actualQuery));
     }
+    
+    @Test
+    public void shouldBuildUpdateQuery()
+    {
+        Server server = new Server();
+        server.setId(ID);
+        server.setName(NAME);
+        server.setLocationId(LOCATION_ID);
+        
+        String actualQuery = queryBuilder.buildUpdateQuery(server);
+        String failureMessage = "Exp: " + EXPECTED_UPDATE_QUERY + "\n"
+                              + "Act: " + actualQuery;
+        Assert.assertTrue(failureMessage, EXPECTED_UPDATE_QUERY.equals(actualQuery));
+    }
+    
+    @Test
+    public void shouldBuildDeleteQuery()
+    {
+        Server server = new Server();
+        server.setId(ID);
+        
+        String actualQuery = queryBuilder.buildDeleteQuery(server);
+        String failureMessage = "Exp: " + EXPECTED_DELETE_QUERY + "\n"
+                              + "Act: " + actualQuery;
+        Assert.assertTrue(failureMessage, EXPECTED_DELETE_QUERY.equals(actualQuery));
+    }
 }

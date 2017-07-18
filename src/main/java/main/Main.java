@@ -87,11 +87,11 @@ public class Main {
         
         ServerDAO serverDAO = DAOFactory.INSTANCE.getServerDAO();
         Server server = new Server();
-        server.setId(24);
-        server.setName("TTTest");
-        server.setLocationId(5);
-        int newServerId = serverDAO.save(server);
-        System.out.println("New server ID = " + newServerId);
+        server.setId(22);
+        server.setName("55Test");
+        server.setLocationId(3);
+        int newServerId = serverDAO.update(server);
+        System.out.println("#" + newServerId);
         
     }    
 }

@@ -18,7 +18,8 @@ public enum JdbcConfig {
     private final String user;
     private final String password;
     
-    JdbcConfig(){
+    JdbcConfig()
+    {
         ResourceBundle config = ResourceBundle.getBundle(CONFIGURATION_FILE_NAME);
         driver = config.getString(DRIVER);
         dbUrl = config.getString(DB_URL);
@@ -26,19 +27,23 @@ public enum JdbcConfig {
         password = config.getString(PASSWORD);
     }
 
-    public String getDriver() {
+    public String getDriver() 
+    {
         return driver;
     }
 
-    public String getDbUrl() {
+    public String getDbUrl() 
+    {
         return dbUrl;
     }
 
-    public String getUser() {
+    public String getUser() 
+    {
         return user;
     }
 
-    public String getPassword() {
+    public String getPassword() 
+    {
         return password;
     }        
 }

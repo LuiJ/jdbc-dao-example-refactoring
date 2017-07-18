@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 
-public class ServerDAO extends AbstractDAO<Server> {
+public class ServerDAO extends DAO<Server> {
 
     public ServerDAO(){
         super(Server.class);
