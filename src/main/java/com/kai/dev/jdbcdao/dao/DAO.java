@@ -55,15 +55,15 @@ public abstract class DAO<T extends Entity>
     
     public int save(T entity) 
     {
-        String saveQuery = queryBuilder.buildInsertQuery(entity);
-        return dbHelper.executeUpdateQuery(saveQuery).get(0);
+        String query = queryBuilder.buildInsertQuery(entity);
+        return dbHelper.executeUpdateQuery(query).get(0);
     } 
     
     
     public int update(T entity) 
     {
-        String saveQuery = queryBuilder.buildUpdateQuery(entity);
-        dbHelper.executeUpdateQuery(saveQuery);      
+        String query = queryBuilder.buildUpdateQuery(entity);
+        dbHelper.executeUpdateQuery(query);      
         return entity.getId();
     } 
 }
