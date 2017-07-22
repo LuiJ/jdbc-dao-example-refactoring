@@ -1,6 +1,6 @@
 package com.kai.dev.jdbcdao.dao;
 
-import com.kai.dev.jdbcdao.db.DbHelper;
+import com.kai.dev.jdbcdao.db.QueryExecutor;
 import com.kai.dev.jdbcdao.db.QueryBuilder;
 import com.kai.dev.jdbcdao.entity.Entity;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.Properties;
 
 public abstract class DAO<T extends Entity>
 {    
-    private final DbHelper<T> dbHelper;
+    private final QueryExecutor<T> queryExecutor;
     private final QueryBuilder<T> queryBuilder;
     
     public DAO(Class<T> type)
     {
-        dbHelper = new DbHelper<>(type);
+        queryExecutor = new QueryExecutor<>(type);
         queryBuilder = new QueryBuilder<>(type);
     }
     
@@ -24,14 +24,14 @@ public abstract class DAO<T extends Entity>
         Properties conditions = new Properties();
         conditions.put(Entity.FIELD_ID, String.valueOf(id));
         String query = queryBuilder.buildSelectQuery(conditions);
-        return dbHelper.executeSelectQuery(query).get(0);
+        return queryExecutor.executeSelectQuery(query).get(0);
     } 
     
     
     public List<T> getAll()
     {
         String query = queryBuilder.buildSelectAllQuery();
-        return dbHelper.executeSelectQuery(query);
+        return queryExecutor.executeSelectQuery(query);
     }
     
     
@@ -49,21 +49,29 @@ public abstract class DAO<T extends Entity>
     public List<T> getAllByConditions(Properties conditions)
     {
         String query = queryBuilder.buildSelectQuery(conditions);
-        return dbHelper.executeSelectQuery(query);
+        return queryExecutor.executeSelectQuery(query);
     }  
     
     
     public int save(T entity) 
     {
         String query = queryBuilder.buildInsertQuery(entity);
-        return dbHelper.executeUpdateQuery(query).get(0);
+        return queryExecutor.executeInsertQuery(query).get(0);
     } 
     
     
     public int update(T entity) 
     {
         String query = queryBuilder.buildUpdateQuery(entity);
-        dbHelper.executeUpdateQuery(query);      
+        queryExecutor.executeUpdateQuery(query);      
         return entity.getId();
     } 
+    
+    
+    public int delete(T entity) 
+    {
+        String query = queryBuilder.buildDeleteQuery(entity);
+        queryExecutor.executeDeleteQuery(query);      
+        return entity.getId();
+    }
 }
