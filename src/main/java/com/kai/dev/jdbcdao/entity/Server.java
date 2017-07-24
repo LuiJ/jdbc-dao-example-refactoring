@@ -1,14 +1,22 @@
 package com.kai.dev.jdbcdao.entity;
 
+import com.kai.dev.jdbcdao.annotation.Column;
+import com.kai.dev.jdbcdao.annotation.Table;
 
+
+@Table(name = "server")
 public class Server extends Entity 
 {    
     public static final String TABLE_NAME = "server";
     public static final String FIELD_NAME = "name";
     public static final String FIELD_LOCATION_ID = "location_id";
     
+    @Column(name = "name")
     private String name;
+    
+    @Column(name = "location_id")
     private Integer locationId;
+    
     private Location location;
     
     public Server()
