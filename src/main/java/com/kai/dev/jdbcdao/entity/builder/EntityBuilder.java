@@ -23,11 +23,7 @@ public class EntityBuilder<T extends Entity>
     public T build(ResultSet resultSet) throws SQLException
     {
         T entity = createNewInstance();
-        Collection<Field> columnFields = columnFieldsRetriever.retrieve(entity);
-        for (Field field : columnFields)
-        {
-            initializeEntityField(entity, field, resultSet);
-        }
+        initialize(entity, resultSet);
         return entity;
     }
     
@@ -47,7 +43,17 @@ public class EntityBuilder<T extends Entity>
     }
     
     
-    private void initializeEntityField(T entity, Field field, 
+    private void initialize(T entity, ResultSet resultSet) throws SQLException
+    {
+        Collection<Field> columnFields = columnFieldsRetriever.retrieve(entity);
+        for (Field field : columnFields)
+        {
+            initializeField(entity, field, resultSet);
+        }
+    }
+    
+    
+    private void initializeField(T entity, Field field, 
                                        ResultSet resultSet) throws SQLException 
     {
         String columnName = field.getDeclaredAnnotation(Column.class).name();
