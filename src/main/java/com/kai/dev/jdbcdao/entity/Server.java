@@ -18,10 +18,6 @@ public class Server extends Entity
     private Integer locationId;
     
     private Location location;
-    
-    public Server()
-    {
-    }
 
     public String getName() 
     {

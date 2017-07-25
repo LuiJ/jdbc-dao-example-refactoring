@@ -4,12 +4,8 @@ import com.kai.dev.jdbcdao.annotation.Column;
 import com.kai.dev.jdbcdao.entity.Entity;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -17,53 +13,22 @@ public class EntityParser<T extends Entity>
 {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     
+    private final EntityColumnFieldsRetriever<T> columnFieldsRetriever;
+    
+    public EntityParser()
+    {
+        columnFieldsRetriever = new EntityColumnFieldsRetriever<>();
+    }
+    
     public Map<String, String> parse(T entity)
     {
         Map<String, String> parsedEntity = new LinkedHashMap<>(); 
-        for (Field field : getFields(entity))
+        for (Field columnField : columnFieldsRetriever.retrieve(entity))
         {
-            if (isNotSuitableField(field))
-            {
-                continue;
-            }
-            parsedEntity.put(getColumnName(field), 
-                             getColumnValue(field, entity));
+            parsedEntity.put(getColumnName(columnField), 
+                             getColumnValue(columnField, entity));
         }        
         return parsedEntity;
-    }
-    
-    
-    private List<Field> getFields(T entity)
-    {
-        List<Field> fields = new ArrayList<>();
-        fields.addAll(getSuperclassFields(entity));
-        fields.addAll(getClassFields(entity));
-        return fields;
-    }
-    
-    
-    private List<Field> getSuperclassFields(T entity)
-    {
-        return Arrays.asList(entity.getClass()
-                                   .getSuperclass()
-                                   .getDeclaredFields());
-    }
-    
-    
-    private List<Field> getClassFields(T entity)
-    {
-        return Arrays.asList(entity.getClass()
-                                   .getDeclaredFields());
-    }
-    
-    
-    private boolean isNotSuitableField(Field field)
-    {
-        boolean isEntity = Entity.class.isAssignableFrom(field.getType());
-        boolean isCollection = Collection.class.isAssignableFrom(field.getType());
-        boolean doesntHaveColumnAnnotation = 
-                field.getDeclaredAnnotation(Column.class) == null;
-        return  doesntHaveColumnAnnotation || isCollection || isEntity;
     }
     
     

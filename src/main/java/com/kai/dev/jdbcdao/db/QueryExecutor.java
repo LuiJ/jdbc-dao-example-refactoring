@@ -2,7 +2,6 @@ package com.kai.dev.jdbcdao.db;
 
 import com.kai.dev.jdbcdao.entity.Entity;
 import com.kai.dev.jdbcdao.entity.builder.EntityBuilder;
-import com.kai.dev.jdbcdao.entity.builder.EntityBuilderFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class QueryExecutor <T extends Entity> {
+public class QueryExecutor <T extends Entity> 
+{    
+    private final EntityBuilder<T> entityBuilder;
     
-    private Class<T> type;
-    
-    public QueryExecutor(Class<T> type){
-        this.type = type;
+    public QueryExecutor(Class<T> type)
+    {
+        entityBuilder = new EntityBuilder(type);
     }     
     
     public List<T> executeSelectQuery(String query)
@@ -30,12 +30,10 @@ public class QueryExecutor <T extends Entity> {
         try 
         {       
             statement = connection.prepareStatement(query); 
-            resultSet = statement.executeQuery();
-                        
-            EntityBuilder builder = EntityBuilderFactory.create(type); 
+            resultSet = statement.executeQuery(); 
             
             while (resultSet.next()){
-                T entity = (T) builder.build(resultSet);
+                T entity = entityBuilder.build(resultSet);
                 entities.add(entity);
             }                       
         } 
@@ -137,6 +135,5 @@ public class QueryExecutor <T extends Entity> {
         {
             throw new IllegalStateException(e.getMessage());
         }
-    }
-    
+    }    
 }

@@ -87,9 +87,9 @@ public class Main {
         
         ServerDAO serverDAO = DAOFactory.INSTANCE.getServerDAO();
         Server server = new Server();
-        server.setId(30);
+        server.setId(21);
         server.setName("Hello!");
-        server.setLocationId(4);
+        server.setLocationId(3);
         int newServerId = serverDAO.update(server);
         System.out.println("#" + newServerId);
         
